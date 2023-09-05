@@ -7,10 +7,9 @@ defmodule CollatzConjecture do
     - if number is even, divide by 2
   """
   @spec calc(input :: pos_integer()) :: non_neg_integer()
-  def calc(0) do
-    # raise ArgumentError, message: "0 is invalid"
-    raise FunctionClauseError
-  end
+  def calc(0), do: raise FunctionClauseError
+  def calc(num) when num < 0, do: raise FunctionClauseError
+  def calc(num) when is_binary(num), do: raise FunctionClauseError
   def calc(num) do
     do_calc(num, 0)
   end
