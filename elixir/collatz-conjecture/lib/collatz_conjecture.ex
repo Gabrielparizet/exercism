@@ -8,7 +8,8 @@ defmodule CollatzConjecture do
   """
   @spec calc(input :: pos_integer()) :: non_neg_integer()
   def calc(0) do
-    raise ArgumentError, message: "0 is invalid"
+    # raise ArgumentError, message: "0 is invalid"
+    raise FunctionClauseError
   end
   def calc(num) do
     do_calc(num, 0)
