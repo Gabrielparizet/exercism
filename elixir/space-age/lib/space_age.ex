@@ -32,7 +32,5 @@ defmodule SpaceAge do
     {:ok, seconds / (@earth_year_in_seconds * @planets_earth_years[planet])}
   end
 
-  def age_on(planet, _seconds) when is_map_key(@planets_earth_years, planet) == false do
-    {:error, "not a planet"}
-  end
+  def age_on(_planet, _seconds), do: {:error, "not a planet"}
 end
