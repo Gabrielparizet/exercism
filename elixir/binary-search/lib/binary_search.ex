@@ -22,25 +22,42 @@ defmodule BinarySearch do
   @spec search(tuple, integer) :: {:ok, integer} | :not_found
   def search(numbers, key) do
     numbers_list = Tuple.to_list(numbers)
+    binary_search(numbers_list, key, 0)
 
-    cond do
-      find_middle_index_value(numbers_list) == key ->
-        {:ok,
-         numbers_list
-         |> length()
-         |> div(2)}
+  end
 
-       true ->
-        "It is greater"
+  defp binary_search([], _key, _index), do: :not_found
+  defp binary_search(numbers_list, key, index) do
+    middle_index = find_middle_index(numbers_list)
+    middle_index_value = find_middle_index_value(numbers_list, middle_index)
+    # IO.inspect(key, label: "the key we are looking for")
+    # IO.inspect(numbers_list, label: "the numbers list")
+    # IO.inspect(middle_index, label: "the middle index")
+    # IO.inspect(middle_index_value, label: "the middle index value")
+    case middle_index_value do
+      middle_index_value when middle_index_value == key -> {:ok, middle_index}
+      middle_index_value when middle_index_value < key -> binary_search(delete_smaller_elements_in_list(numbers_list, middle_index), key, index + middle_index - 1)
+      middle_index_value when middle_index_value > key -> binary_search(delete_bigger_elements_in_list(numbers_list, middle_index), key, index + middle_index + 1)
     end
   end
 
-  def find_middle_index_value(numbers) do
-    middle_index =
-      numbers
-      |> length()
-      |> div(2)
-
-    Enum.at(numbers, middle_index)
+  def find_middle_index(numbers_list) do
+    numbers_list
+    |> length()
+    |> div(2)
   end
+
+  def find_middle_index_value(numbers_list, index) do
+    Enum.at(numbers_list, index)
+  end
+
+  def delete_smaller_elements_in_list(numbers_list, middle_index) do
+    Enum.take(numbers_list, -middle_index)
+  end
+
+  def delete_bigger_elements_in_list(numbers_list, middle_index) do
+    Enum.take(numbers_list, middle_index)
+  end
+
+
 end
