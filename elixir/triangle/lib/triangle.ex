@@ -8,12 +8,12 @@ defmodule Triangle do
   def kind(a, b, c) do
     do_kind(a, b, c, all_params_are_positive([a, b, c]))
   end
-  def do_kind(_, _, _, false), do: {:error, "all side lengths must be positive"}
-  def do_kind(a, a, a, _), do: {:ok, :equilateral}
-  def do_kind(a, a, b, _), do: validate_isosceles(a, b)
-  def do_kind(a, b, a, _), do: validate_isosceles(a, b)
-  def do_kind(b, a, a, _), do: validate_isosceles(a, b)
-  def do_kind(a, b, c, _) do
+  defp do_kind(_, _, _, false), do: {:error, "all side lengths must be positive"}
+  defp do_kind(a, a, a, _), do: {:ok, :equilateral}
+  defp do_kind(a, a, b, _), do: validate_isosceles(a, b)
+  defp do_kind(a, b, a, _), do: validate_isosceles(a, b)
+  defp do_kind(b, a, a, _), do: validate_isosceles(a, b)
+  defp do_kind(a, b, c, _) do
     [largest, second, third] = Enum.sort([a, b, c], :desc)
     cond do
       largest > second + third -> {:error, "side lengths violate triangle inequality"}
