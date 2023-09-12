@@ -1,6 +1,5 @@
 defmodule BasketballWebsite do
   def extract_from_path(data, path) do
-    # Please implement the extract_from_path/2 function
     keys = String.split(path, ".")
     do_extract_from_path(data, keys)
   end
