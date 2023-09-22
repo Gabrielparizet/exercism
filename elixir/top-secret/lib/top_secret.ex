@@ -4,13 +4,13 @@ defmodule TopSecret do
   end
 
   def decode_secret_message_part({operation, _, list_of_arguments} = ast, acc)
-    when operation in [:def, :defp], do: {ast, [ get_list_of_arguments(list_of_arguments) | acc ]}
+    when operation in [:def, :defp], do: {ast, [ get_name(list_of_arguments) | acc ]}
 
   def decode_secret_message_part(ast, acc) do
     {ast, acc}
   end
 
-    defp get_list_of_arguments(list_of_arguments) do
+    defp get_name(list_of_arguments) do
       {operation, _, _args} = Enum.at(list_of_arguments, 0)
       Atom.to_string(operation)
     end
