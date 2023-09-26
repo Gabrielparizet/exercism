@@ -25,7 +25,7 @@ defmodule Anagram do
   def find_matching_indexes(list, comparing_value) do
     list
     |> Enum.with_index()
-    |> Enum.filter(fn {value, _index} -> String.contains?(value, comparing_value) end)
+    |> Enum.filter(fn {value, _index} -> String.equivalent?(value, comparing_value) end)
     |> Enum.map(fn {_value, index} -> index end)
   end
 
