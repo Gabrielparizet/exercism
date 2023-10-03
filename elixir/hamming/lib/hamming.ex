@@ -8,16 +8,19 @@ defmodule Hamming do
   {:ok, 4}
   """
   @spec hamming_distance([char], [char]) :: {:ok, non_neg_integer} | {:error, String.t()}
+  def hamming_distance(strand1, strand2) when length(strand1) != length(strand2) do
+    {:error, "strands must be of equal length"}
+  end
   def hamming_distance(strand1, strand2) do
-    {:ok, count_differences(strand1, strand2, 0)}
+    {:ok, do_hamming_distance(strand1, strand2, 0)}
   end
 
-  # def do_hamming_distance([], [], count), do: count
-  def count_differences([], [], count), do: count
-  def count_differences([char1 | rest1], [char2 | rest2], count) when char1 != char2 do
-    count_differences(rest1, rest2, count + 1)
+  defp do_hamming_distance([], [], count), do: count
+  defp do_hamming_distance([ char1 | rest1 ], [ char2 | rest2 ], count) when char1 != char2 do
+    do_hamming_distance(rest1, rest2, count + 1)
   end
-  def count_differences([_char1 | rest1], [_char2 | rest2], count) do
-    count_differences(rest1, rest2, count)
+  defp do_hamming_distance([ _char1 | rest1 ], [ _char2 | rest2 ], count) do
+    do_hamming_distance(rest1, rest2, count)
   end
+
 end
