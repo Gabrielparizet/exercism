@@ -1,0 +1,9 @@
+{application,stack_underflow,
+             [{optional_applications,[]},
+              {applications,[kernel,stdlib,elixir,logger]},
+              {description,"stack_underflow"},
+              {modules,['Elixir.RPNCalculator.Exception',
+                        'Elixir.RPNCalculator.Exception.DivisionByZeroError',
+                        'Elixir.RPNCalculator.Exception.StackUnderflowError']},
+              {registered,[]},
+              {vsn,"0.1.0"}]}.
