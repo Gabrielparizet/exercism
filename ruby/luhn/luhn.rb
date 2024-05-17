@@ -9,4 +9,11 @@ class Luhn
     def initialize(string)
         @string = string
     end
+
+    def valid?(@string)
+        if @string.length <= 1
+            false 
+        else
+            
+        end
 end
